@@ -14,7 +14,7 @@ def recursive_copy(src:Path, dst:Path):
 
     for elem in src.iterdir():
         if elem.is_dir():
-            recursive_copy(elem, dst / elem.name)
+            recursive_copy(elem, dst)
         else:
             extension = elem.suffix[1:]
             if not dst.joinpath(extension).exists():
