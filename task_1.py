@@ -16,7 +16,10 @@ def recursive_copy(src:Path, dst:Path):
         if elem.is_dir():
             recursive_copy(elem, dst / elem.name)
         else:
-            shutil.copy(elem, dst / elem.name)
+            extension = elem.suffix[1:]
+            if not dst.joinpath(extension).exists():
+                dst.joinpath(extension).mkdir(exist_ok=True, parents=True)
+            shutil.copy(elem, dst / extension / elem.name)
 
 def main():
     try:
